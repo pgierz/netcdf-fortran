@@ -1,0 +1,14 @@
+name = "NetCDF"
+version = "4.5.4"
+license = "GPL v3"                       # Probably wrong
+author = "Unidata"
+maintainer = "paul.gierz@awi.de"         # Only for the fpm version
+copyright = "Copyright 2022, Paul Gierz" # Only for the fpm version
+[build]
+auto-executables = true
+auto-tests = true
+auto-examples = true
+[install]
+library = true
+[library]
+source-dir = "fortran"
