@@ -22,9 +22,6 @@ class collectionCase():
 #_____________________________________________________________________________
 # Definitions
 
-maxdims = 7
-dimnames = []
-
 f_types = [ 'OneByteInt', 'TwoByteInt', 'FourByteInt', 'EightByteInt', 'FourByteReal', 'EightByteReal' ]
 
 fc_types = { 'OneByteInt':'c_int8_t', 'TwoByteInt':'c_int16_t', 'FourByteInt':'c_int32_t', 'EightByteInt':'c_int64_t',
@@ -39,24 +36,20 @@ array_types = { 'OneByteInt':'integer(c_int8_t)', 'TwoByteInt':'integer(c_int16_
 }
 
 colons_of_dim = []
+maxdims = 7
 for dim in range(1, maxdims+1):
-    commas = []
-    for i in range(1, dim+1): 
-        commas.append(":")
+    commas = [":" for _ in range(1, dim+1)]
     colons_of_dim.append(",".join(commas))
-    
-for dim in range(1, maxdims+1):
-    dimnames.append("{}D".format(dim))
 
+dimnames = [f"{dim}D" for dim in range(1, maxdims+1)]
 #_____________________________________________________________________________
 # Make the cases
 
 cases_to_create = []
 
-for f_type in fc_types:
+for f_type, fc_type in fc_types.items():
     for dim in range(1, maxdims+1):
         idx = dim-1
-        fc_type = fc_types[f_type]
         c_type = c_types[f_type]
         a_type = array_types[f_type]
         cases_to_create.append(collectionCase(dim, dimnames[idx], f_type, fc_type, c_type, a_type, colons_of_dim[idx]))
